@@ -12,11 +12,6 @@ public class DOP{
         private int weight;
         private Element left, right;
 
-        private Element(Data dat) {
-            data = dat.getValue();
-            weight = dat.getWeight();
-        }
-
         private Element(Data dat, Element left, Element right){
             data = dat.getValue();
             weight = dat.getWeight();

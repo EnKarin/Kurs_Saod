@@ -23,7 +23,8 @@ public class Main {
                 b[2][i] = dat.readByte();
             }
             String a = new String(b[0],0,30, Charset.forName("CP866"));
-            list.add(new Struct(a, x, new String(b[1],0,22, Charset.forName("CP866")), new String(b[2],0,30, Charset.forName("CP866"))));
+            list.add(new Struct(a, x, new String(b[1],0,22, Charset.forName("CP866")), new String(b[2],
+                    0,30, Charset.forName("CP866"))));
         }
 
         int[] indexMas = new int[list.size()];
@@ -38,6 +39,7 @@ public class Main {
             System.out.println("sort для вывода отсортированной базы");
             System.out.println("origin для вывода неотсортированной базы");
             System.out.println("search для поиска по ключу");
+            System.out.println("code для вывода закодированной базы");
             System.out.println("close для выхода из программы");
             switch (scan.next()) {
                 case "sort":
@@ -153,6 +155,25 @@ public class Main {
                     }
 
                     break;
+                case "code":
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for(int i = 0; i < list.size(); i++){
+                        stringBuilder.append(list.get(i).getFio());
+                        stringBuilder.append(" ");
+                        stringBuilder.append(list.get(i).getSum());
+                        stringBuilder.append(" ");
+                        stringBuilder.append(list.get(i).getDat());
+                        stringBuilder.append(" ");
+                        stringBuilder.append(list.get(i).getLaw());
+                        stringBuilder.append(" ");
+                    }
+                    Haff haff = new Haff(stringBuilder.toString());
+                    System.out.println("Полученный код:");
+                    haff.printHaffCode();
+                    System.out.println("Средняя длина кодового слова: " + haff.getLForHaff());
+                    System.out.println("Энтропия исходного файла: "+ haff.entropie());
+                    System.out.println();
+                    break;
                 case "close":
                     flag = false;
                     break;
@@ -193,5 +214,9 @@ class Struct{
 
     public int getSum(){
         return sum;
+    }
+
+    public String getDat() {
+        return dat;
     }
 }
