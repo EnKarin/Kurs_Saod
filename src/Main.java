@@ -9,6 +9,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         File file = new File("testBase3.dat");
         ArrayList<Struct> list = new ArrayList<>();
+        ArrayDeque<Struct> structArrayDeque = new ArrayDeque<>();
         byte[][] b = new byte[3][30];
         DataInputStream dat = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
         while(dat.available() > 0){
@@ -40,6 +41,7 @@ public class Main {
             System.out.println("origin для вывода неотсортированной базы");
             System.out.println("search для поиска по ключу");
             System.out.println("code для вывода закодированной базы");
+            System.out.println("tree для вывода дерева");
             System.out.println("close для выхода из программы");
             switch (scan.next()) {
                 case "sort":
@@ -69,7 +71,6 @@ public class Main {
                 case "search":
                     System.out.print("Введите первые три буквы фамилии адвоката: ");
                     String key = scan.next().toLowerCase();
-                    ArrayDeque<Struct> structArrayDeque = new ArrayDeque<>();
                     int l = 0, r = list.size() - 1;
                     for(int i = l + (r - l) / 2; l < r; i = l + (r - l) / 2){
                         if(list.get(indexMas[i]).getLaw().substring(0, 3).toLowerCase().compareTo(key) < 0){
@@ -115,6 +116,14 @@ public class Main {
                             newData[i] = data[i];
                         }
                         dop.addA2(newData);
+                        System.out.println("Записи добавлены");
+                    }
+                    else {
+                        System.out.println("Записи с таким ключом нет");
+                    }
+                    break;
+                case "tree":
+                    if(structArrayDeque.size() != 0) {
                         boolean stop = true;
                         while (stop) {
                             System.out.println("Введите search для поиска по найденным записям по ФИО");
@@ -127,11 +136,10 @@ public class Main {
                                     scan.nextLine();
                                     String search = scan.nextLine().toLowerCase();
                                     ArrayDeque<Struct> temp = dop.search(search.trim());
-                                    if(temp == null){
+                                    if (temp == null) {
                                         System.out.println("Записи с таким ключом нет");
-                                    }
-                                    else{
-                                        for(Struct t: temp){
+                                    } else {
+                                        for (Struct t : temp) {
                                             t.print();
                                         }
                                     }
@@ -140,7 +148,7 @@ public class Main {
                                     dop.printLeft();
                                     break;
                                 case "printSpis":
-                                    for(Struct struct: structArrayDeque){
+                                    for (Struct struct : structArrayDeque) {
                                         struct.print();
                                     }
                                     break;
@@ -150,10 +158,9 @@ public class Main {
                             }
                         }
                     }
-                    else {
-                        System.out.println("Записи с таким ключом нет");
+                    else{
+                        System.out.println("Tree is empty!");
                     }
-
                     break;
                 case "code":
                     StringBuilder stringBuilder = new StringBuilder();
