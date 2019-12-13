@@ -83,31 +83,31 @@ public class DOP{
     }
 }
 
-    class Data{
-        private int weight;
-        private ArrayDeque<Struct> value;
-        private String key;
+class Data {
+    private int weight;
+    private ArrayDeque<Struct> value;
+    private String key;
 
-        Data(int w, Struct v){
-            weight = w;
-            value = new ArrayDeque<>();
-            value.add(v);
-            key = v.getFio();
-        }
-
-        public ArrayDeque<Struct> getValue() {
-            return value;
-        }
-
-        public void add(Struct arc){
-            value.add(arc);
-        }
-
-        public int getWeight() {
-            return weight;
-        }
-
-        public String getKey() {
-            return key;
-        }
+    Data(int w, Struct v) {
+        weight = w;
+        value = new ArrayDeque<>();
+        value.add(v);
+        key = v.getFio();
     }
+
+    public ArrayDeque<Struct> getValue() {
+        return value;
+    }
+
+    public void add(Struct arc) {
+        value.add(arc);
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public String getKey() {
+        return key;
+    }
+}

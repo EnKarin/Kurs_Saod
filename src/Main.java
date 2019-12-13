@@ -69,6 +69,7 @@ public class Main {
                     }
                     break;
                 case "search":
+                    structArrayDeque = new ArrayDeque<>();
                     System.out.print("Введите первые три буквы фамилии адвоката: ");
                     String key = scan.next().toLowerCase();
                     int l = 0, r = list.size() - 1;
@@ -116,7 +117,9 @@ public class Main {
                             newData[i] = data[i];
                         }
                         dop.addA2(newData);
-                        System.out.println("Записи добавлены");
+                        for (Struct struct : structArrayDeque) {
+                            struct.print();
+                        }
                     }
                     else {
                         System.out.println("Записи с таким ключом нет");
@@ -127,7 +130,6 @@ public class Main {
                         boolean stop = true;
                         while (stop) {
                             System.out.println("Введите search для поиска по найденным записям по ФИО");
-                            System.out.println("printSpis для вывода cписка записей ");
                             System.out.println("printTree для вывода дерева найденных записей");
                             System.out.println("или break для выхода в главное меню");
                             switch (scan.next()) {
@@ -146,11 +148,6 @@ public class Main {
                                     break;
                                 case "printTree":
                                     dop.printLeft();
-                                    break;
-                                case "printSpis":
-                                    for (Struct struct : structArrayDeque) {
-                                        struct.print();
-                                    }
                                     break;
                                 case "break":
                                     stop = false;

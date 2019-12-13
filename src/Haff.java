@@ -6,11 +6,11 @@ public class Haff {
     private Map<Character, StringBuilder> haffCod = new TreeMap<>();
     Data[] data;
     class Data{
-        private char simbol;
+        private char symbol;
         private double probability;
 
         Data(char s, double p){
-            simbol = s;
+            symbol = s;
             probability = p;
         }
     }
@@ -59,11 +59,11 @@ public class Haff {
 
         for(int i = 0; i < data.length; i++){
             data[i].probability /= originString.length();
-        }//получаем в дате чистые вероятности
+        }
 
         Vector<Struct> vector = new Vector<>();
         for(int i = 0; i < data.length; i++) {
-            vector.add(new Struct(data[i].simbol, data[i].probability));
+            vector.add(new Struct(data[i].symbol, data[i].probability));
         }
         makeHaff(vector);
         for(Struct temp: vector){
@@ -103,7 +103,7 @@ public class Haff {
     private double midLength(Map<Character, StringBuilder> map){
         double result = 0;
         for(int i = 0; i < data.length; i++){
-            result += map.get(data[i].simbol).length() * data[i].probability;
+            result += map.get(data[i].symbol).length() * data[i].probability;
         }
         return result;
     }
@@ -114,10 +114,6 @@ public class Haff {
             res += -(Math.log(data[i].probability) / Math.log(2)) * data[i].probability;
         }
         return res;
-    }
-
-    public Map<Character, StringBuilder> getHaffCod() {
-        return haffCod;
     }
 
     public double getLForHaff(){
